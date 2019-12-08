@@ -1,7 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse('1111')
-d
+    return render(request, 'seman/index.html')
+
+def add_file(request):
+    if request.method == 'POST':
+        if request.FILES:
+            type = request.FILES['file'].name.split(".")[1]
+            return HttpResponse(type)
+        else:
+            return redirect('/')
+
