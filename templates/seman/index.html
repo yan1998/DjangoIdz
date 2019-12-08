@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="add_file/" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <input type="file" name="file">
+        <br>
+        <br>
+        <input type="submit" valu="Отправить">
+    </form>
+</body>
+</html>
