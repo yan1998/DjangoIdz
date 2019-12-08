@@ -5,10 +5,10 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'seman/index.html')
 
-def add_file(request):
+def upload_file(request):
     if request.method == 'POST':
         if request.FILES:
-            type = request.FILES['file'].name.split(".")[1]
+            type = request.FILES['file'].name.split(".")[-1]
             return HttpResponse(type)
         else:
             return redirect('/')
