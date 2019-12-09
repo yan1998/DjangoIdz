@@ -1,1 +1,4 @@
 venv/
+seman/__pycache__/
+my_parser/__pycache__/
+Idz/__pycache__/
