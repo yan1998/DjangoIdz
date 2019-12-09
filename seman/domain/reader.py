@@ -1,3 +1,6 @@
+import docx
+import PyPDF2
+
 class Reader:
 
     @staticmethod
@@ -8,10 +11,17 @@ class Reader:
         return fileContent
 
     @staticmethod
+    def read_docx_file(file):
+        doc = docx.Document(file)
+        fullText = []
+        for para in doc.paragraphs:
+            fullText.append(para.text)
+        return '\n'.join(fullText)
+
+    @staticmethod
     def read_doc_file():
-        return "Reading doc file!"
+        return "Извините! Пока не можем прочитать это файл!"
   
     @staticmethod
-    def read_pdf_file():
-        return "Reading pdf file!"
-
+    def read_pdf_file(file):
+        return "Извините! Пока не можем прочитать это файл!"

@@ -1,4 +1,5 @@
 venv/
 seman/__pycache__/
+seman/migrations/__pycache__/
 my_parser/__pycache__/
 Idz/__pycache__/
