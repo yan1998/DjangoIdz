@@ -3,7 +3,7 @@ Django==3.0
 pytz==2019.3
 sqlparse==0.3.0
 docx==0.2.4
-PyPDF2=1.26.0
-python-docx
-requests
-beautifulsoup4
+PyPDF2==1.26.0
+python-docx==0.8.10
+requests==2.22.0
+beautifulsoup4==4.8.1
