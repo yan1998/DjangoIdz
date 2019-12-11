@@ -18,6 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('seman.urls')),
-    path('parser', include('my_parser.urls')),
+    path('', include('seman.urls'))
 ]
