@@ -1,5 +1,6 @@
 import docx
-import PyPDF2
+import pdfminer.high_level 
+import io
 
 class Reader:
 
@@ -13,10 +14,10 @@ class Reader:
     @staticmethod
     def read_docx_file(file):
         doc = docx.Document(file)
-        fullText = []
+        fileContent = []
         for para in doc.paragraphs:
-            fullText.append(para.text)
-        return '\n'.join(fullText)
+            fileContent.append(para.text)
+        return '\n'.join(fileContent)
 
     @staticmethod
     def read_doc_file():
@@ -24,4 +25,6 @@ class Reader:
   
     @staticmethod
     def read_pdf_file(file):
-        return "Извините! Пока не можем прочитать это файл!"
+        fileContent = io.StringIO()
+        pdfminer.high_level.extract_text_to_fp(file, fileContent)
+        return fileContent.getvalue()

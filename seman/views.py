@@ -16,10 +16,10 @@ def upload_file(request):
                 fileContent = Reader.read_txt_file(request.FILES['file'])
             elif type == "docx":
                 fileContent = Reader.read_docx_file(request.FILES['file'])
+            elif type == "pdf":
+                fileContent = Reader.read_pdf_file(request.FILES['file'])
             # elif type == "doc":
             #    fileContent = Reader.read_doc_file()
-            # elif type == "pdf":
-            #    fileContent = Reader.read_pdf_file(request.FILES['file'])
             else:
                 return HttpResponse('Ошибка! Файл с расширением " + type + " не поддерживается!')
 
