@@ -15,10 +15,10 @@ def upload_file(request):
                 fileContent = Reader.read_txt_file(request.FILES['file'])
             elif type == "docx":
                 fileContent = Reader.read_docx_file(request.FILES['file'])
-            elif type == "doc":
-                fileContent = Reader.read_doc_file()
-            elif type == "pdf":
-                fileContent = Reader.read_pdf_file(request.FILES['file'])
+            # elif type == "doc":
+            #    fileContent = Reader.read_doc_file()
+            # elif type == "pdf":
+            #    fileContent = Reader.read_pdf_file(request.FILES['file'])
             else:
                 fileContent = "Ошибка! File with type = " + type + " is not supported!"
             return HttpResponse(fileContent)
