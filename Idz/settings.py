@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'seman.apps.SemanConfig',
-    'my_parser.apps.MyParserConfig'
+    'seman.apps.SemanConfig'
 ]
 
 MIDDLEWARE = [
