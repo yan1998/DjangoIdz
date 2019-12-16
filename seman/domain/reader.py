@@ -1,5 +1,5 @@
 import docx
-import pdfminer.high_level 
+import pdfminer.high_level
 import io
 
 class Reader:

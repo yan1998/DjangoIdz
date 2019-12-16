@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .domain.reader import Reader
 from .domain.parser import Parser
 import requests
+import json
 
 def index(request):
     return render(request, 'seman/index.html')
@@ -42,4 +43,3 @@ def processTextViaAdvego(fileContent):
     s = requests.Session()
     response = s.post('https://advego.com/text/seo/', data=postload)
     return Parser.parseAdvego(response)
-   
