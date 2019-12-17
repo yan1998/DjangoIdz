@@ -1,73 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Результат обработки текста</title>
-    </head>
-    <body>
-        <table>
-            <tr>
-                <th>Наименования показателя</th>
-                <th>Значение</th>
-            </tr>
-            {% for item in semantics %}
-                <tr>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.val }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+<head>
+    <meta charset="UTF-8">
+    <title>Результат обработки текста</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
 
-        <br><br>
+<table>
+    <tr>
+        <th>Наименования показателя</th>
+        <th>Значение</th>
+    </tr>
+    {% for item in semantics %}
+    <tr>
+        <td>{{ item.title }}</td>
+        <td>{{ item.val }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
-        <table>
-            <tr>
-                <th>Слово</th>
-                <th>Количество</th>
-                <th>Частота, %</th>
-            </tr>
-            {% for item in words %}
-                <tr>
-                    <td>{{ item.word }}</td>
-                    <td>{{ item.count }}</td>
-                    <td>{{ item.frequency }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+<br><br>
 
-        <br><br>
+<table>
+    <tr>
+        <th>Слово</th>
+        <th>Количество</th>
+        <th>Частота, %</th>
+    </tr>
+    {% for item in words %}
+    <tr class="count_tr">
+        <td class="count_td_name">{{ item.word }}</td>
+        <td class="count_td">{{ item.count }}</td>
+        <td class="count_td_fr">{{ item.frequency }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
-        <table>
-            <tr>
-                <th>Слово</th>
-                <th>Количество</th>
-                <th>Частота, %</th>
-            </tr>
-            {% for item in stop_words %}
-                <tr>
-                    <td>{{ item.word }}</td>
-                    <td>{{ item.count }}</td>
-                    <td>{{ item.frequency }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+<br><br>
 
-        <br><br>
-        
-        <table>
-            <tr>
-                <th>Слово</th>
-                <th>Количество</th>
-                <th>Частота, %</th>
-            </tr>
-            {% for item in english_words %}
-                <tr>
-                    <td>{{ item.word }}</td>
-                    <td>{{ item.count }}</td>
-                    <td>{{ item.frequency }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+<table>
+    <tr>
+        <th>Слово</th>
+        <th>Количество</th>
+        <th>Частота, %</th>
+    </tr>
+    {% for item in stop_words %}
+    <tr>
+        <td>{{ item.word }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.frequency }}</td>
+    </tr>
+    {% endfor %}
+</table>
+  
+<br><br>
+  
+<table>
+    <tr>
+        <th>Слово</th>
+        <th>Количество</th>
+        <th>Частота, %</th>
+    </tr>
+    {% for item in english_words %}
+    <tr>
+        <td>{{ item.word }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.frequency }}</td>
+     </tr>
+    {% endfor %}
+</table>
 
+<div style="width: 600px; height: 100%;">
+    <canvas id="myChart" width="200" height="200"></canvas>
+</div>
+<br><br>
+<div style="width: 400px; height: 900px;">
+    <canvas id="myChart2" width="200" height="200"></canvas>
+</div>
+<br><br>
+<div style="width: 600px; height: 900px;">
+    <canvas id="myChart3" width="200" height="200"></canvas>
+</div>
+<script src="{% static 'script/main.js' %}"></script>
     </body>
 </html>
