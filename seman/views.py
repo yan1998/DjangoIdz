@@ -44,9 +44,18 @@ def processTextViaAdvego(fileContent):
     s = requests.Session()
     response = s.post('https://advego.com/text/seo/', data=postload)
     parseResult = Parser.parseAdvego(response)
+    parseResult['semantics'].append(processPunctuationChars(fileContent))
     parseResult['english_words'] = processEnglishWords(fileContent)
     return parseResult
    
+def processPunctuationChars(fileContent):
+    punctuationChars = re.findall(r'\.|,|\?|-|;|:|!', fileContent)
+    result = {
+        'title': 'Знаки пунктуации',
+        'val': len(punctuationChars)
+    }
+    return result
+
 def processEnglishWords(fileContent):
     englishWords = re.findall(r'\w*[а-яА-Я]*[a-zA-Z]+[а-яА-Я]*\w*', fileContent)
     countOfEnglishWords = len(englishWords)
