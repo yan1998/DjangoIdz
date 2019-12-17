@@ -55,8 +55,23 @@
     </tr>
     {% endfor %}
 </table>
-
-
+  
+<br><br>
+  
+<table>
+    <tr>
+        <th>Слово</th>
+        <th>Количество</th>
+        <th>Частота, %</th>
+    </tr>
+    {% for item in english_words %}
+    <tr>
+        <td>{{ item.word }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.frequency }}</td>
+     </tr>
+    {% endfor %}
+</table>
 
 <div style="width: 600px; height: 100%;">
     <canvas id="myChart" width="200" height="200"></canvas>
@@ -70,6 +85,5 @@
     <canvas id="myChart3" width="200" height="200"></canvas>
 </div>
 <script src="{% static 'script/main.js' %}"></script>
-
-</body>
+    </body>
 </html>
