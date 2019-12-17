@@ -4,6 +4,7 @@ from .domain.reader import Reader
 from .domain.parser import Parser
 import requests
 import re
+from operator import itemgetter
 
 def index(request):
     return render(request, 'seman/index.html')
@@ -44,6 +45,7 @@ def processTextViaAdvego(fileContent):
     response = s.post('https://advego.com/text/seo/', data=postload)
     parseResult = Parser.parseAdvego(response)
     parseResult['semantics'].append(processPunctuationChars(fileContent))
+    parseResult['english_words'] = processEnglishWords(fileContent)
     return parseResult
    
 def processPunctuationChars(fileContent):
@@ -53,3 +55,17 @@ def processPunctuationChars(fileContent):
         'val': len(punctuationChars)
     }
     return result
+
+def processEnglishWords(fileContent):
+    englishWords = re.findall(r'\w*[а-яА-Я]*[a-zA-Z]+[а-яА-Я]*\w*', fileContent)
+    countOfEnglishWords = len(englishWords)
+    uniqueEnglishWords = list(set(englishWords))
+    englishWordsResult = []
+    for uniqueEnglishWord in uniqueEnglishWords:
+        countUniqueEnglishWord = englishWords.count(uniqueEnglishWord)
+        englishWordsResult.append({
+            'word': uniqueEnglishWord,
+            'count': countUniqueEnglishWord,
+            'frequency': round(100 / countOfEnglishWords * countUniqueEnglishWord, 2)
+        })
+    return sorted(englishWordsResult, key=itemgetter('count'), reverse=True)

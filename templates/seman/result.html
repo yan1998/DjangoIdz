@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Результат обработки текста</title>
-</head>
-<body>
-
-    <table>
-        <tr>
-            <th>Наименования показателя</th>
-            <th>Значение</th>
-        </tr>
-        {% for item in semantics %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Результат обработки текста</title>
+    </head>
+    <body>
+        <table>
             <tr>
-                <td>{{ item.title }}</td>
-                <td>{{ item.val }}</td>
+                <th>Наименования показателя</th>
+                <th>Значение</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for item in semantics %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.val }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
-    <br><br>
+        <br><br>
 
-    <table>
-        <tr>
-            <th>Слово</th>
-            <th>Количество</th>
-            <th>Частота, %</th>
-        </tr>
-        {% for item in words %}
+        <table>
             <tr>
-                <td>{{ item.word }}</td>
-                <td>{{ item.count }}</td>
-                <td>{{ item.frequency }}</td>
+                <th>Слово</th>
+                <th>Количество</th>
+                <th>Частота, %</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for item in words %}
+                <tr>
+                    <td>{{ item.word }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.frequency }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
-    <br><br>
+        <br><br>
 
-    <table>
-        <tr>
-            <th>Слово</th>
-            <th>Количество</th>
-            <th>Частота, %</th>
-        </tr>
-        {% for item in stop_words %}
+        <table>
             <tr>
-                <td>{{ item.word }}</td>
-                <td>{{ item.count }}</td>
-                <td>{{ item.frequency }}</td>
+                <th>Слово</th>
+                <th>Количество</th>
+                <th>Частота, %</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for item in stop_words %}
+                <tr>
+                    <td>{{ item.word }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.frequency }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
+        <br><br>
+        
+        <table>
+            <tr>
+                <th>Слово</th>
+                <th>Количество</th>
+                <th>Частота, %</th>
+            </tr>
+            {% for item in english_words %}
+                <tr>
+                    <td>{{ item.word }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.frequency }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
-</body>
+    </body>
 </html>

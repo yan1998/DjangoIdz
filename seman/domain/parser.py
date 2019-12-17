@@ -38,7 +38,8 @@ class Parser:
             content = {
                 'semantics': semantics,
                 'words': words,
-                'stop_words': stop_words
+                'stop_words': stop_words,
+                'english_words': None
             }
             return content
         else:
