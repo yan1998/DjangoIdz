@@ -65,9 +65,9 @@
         <th>Частота, %</th>
     </tr>
     {% for item in english_words %}
-    <tr>
-        <td>{{ item.word }}</td>
-        <td>{{ item.count }}</td>
+    <tr class="count_tr_en">
+        <td class="count_td_name_en">{{ item.word }}</td>
+        <td class="count_td_en">{{ item.count }}</td>
         <td>{{ item.frequency }}</td>
      </tr>
     {% endfor %}
@@ -84,6 +84,10 @@
 <div style="width: 600px; height: 900px;">
     <canvas id="myChart3" width="200" height="200"></canvas>
 </div>
+<br><br>
+<div style="width: 600px; height: 900px;">
+    <canvas id="myChart4" width="200" height="200"></canvas>
+</div>
 <script src="{% static 'script/main.js' %}"></script>
-    </body>
+</body>
 </html>

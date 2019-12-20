@@ -118,3 +118,42 @@ var myChart = new Chart(ctx, {
             }
         }
     });
+
+
+count_words_en = [];
+    name_words_en = [];
+    new_color_back_en = [];
+
+    $('.count_tr_en').each(function () {
+        name_words_en.push($(this).children('.count_td_name_en').html());
+        count_words_en.push($(this).children('.count_td_en').html());
+        new_color_back_en.push(arrayRandElement(сolors_back));
+    });
+
+    console.log(count_words_en);
+    console.log(name_words_en);
+    console.log(new_color_back_en);
+
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: name_words_en,
+        datasets: [{
+            label: 'Количество',
+            data: count_words_en,
+            backgroundColor: new_color_back_en,
+                //borderColor: new_color_border,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
