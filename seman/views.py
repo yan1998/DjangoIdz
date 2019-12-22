@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.cache import cache
 from django.http import HttpResponse
 from .domain.reader import Reader
 from .domain.parser import Parser
@@ -32,6 +33,7 @@ def upload_file(request):
             if parsedData == None:
                 return HttpResponse('Перейдите на сайт и пройдите рекапчу <a href="https://advego.com/text/seo/">Ссылка</a>')
             else:
+                cache.set('report', parsedData)
                 return render(request, 'seman/result.html', parsedData)
         else:
             return HttpResponse('Ошибка! Файл не был прикреплен!')
@@ -47,7 +49,33 @@ def processTextViaAdvego(fileContent):
     parseResult['semantics'].append(processPunctuationChars(fileContent))
     parseResult['english_words'] = processEnglishWords(fileContent)
     return parseResult
-   
+
+def sort_results(request, command):
+    parsedData = cache.get('report')
+    if parsedData == None:
+        return redirect('/')
+    if command == "valueAsc":
+        parsedData['semantics'] = sorted(parsedData['semantics'], key=itemgetter('val'), reverse=False)
+        parsedData['words'] = sorted(parsedData['words'], key=itemgetter('count'), reverse=False)
+        parsedData['stop_words'] = sorted(parsedData['stop_words'], key=itemgetter('count'), reverse=False)
+        parsedData['english_words'] = sorted(parsedData['english_words'], key=itemgetter('count'), reverse=False)
+    elif command == "valueDesc":
+        parsedData['semantics'] = sorted(parsedData['semantics'], key=itemgetter('val'), reverse=True)
+        parsedData['words'] = sorted(parsedData['words'], key=itemgetter('count'), reverse=True)
+        parsedData['stop_words'] = sorted(parsedData['stop_words'], key=itemgetter('count'), reverse=True)
+        parsedData['english_words'] = sorted(parsedData['english_words'], key=itemgetter('count'), reverse=True)
+    elif command == "nameAsc":
+        parsedData['semantics'] = sorted(parsedData['semantics'], key=itemgetter('title'), reverse=False)
+        parsedData['words'] = sorted(parsedData['words'], key=itemgetter('word'), reverse=False)
+        parsedData['stop_words'] = sorted(parsedData['stop_words'], key=itemgetter('word'), reverse=False)
+        parsedData['english_words'] = sorted(parsedData['english_words'], key=itemgetter('word'), reverse=False)
+    else:
+        parsedData['semantics'] = sorted(parsedData['semantics'], key=itemgetter('title'), reverse=True)
+        parsedData['words'] = sorted(parsedData['words'], key=itemgetter('word'), reverse=True)
+        parsedData['stop_words'] = sorted(parsedData['stop_words'], key=itemgetter('word'), reverse=True)
+        parsedData['english_words'] = sorted(parsedData['english_words'], key=itemgetter('word'), reverse=True)
+    return render(request, 'seman/result.html', parsedData)
+
 def processPunctuationChars(fileContent):
     punctuationChars = re.findall(r'\.|,|\?|-|;|:|!', fileContent)
     result = {
