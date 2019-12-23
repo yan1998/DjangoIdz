@@ -13,6 +13,7 @@
         <br>
         <button id="valueAsc">Сортировать по числовому параметру в прямом порядке</button>
         <button id="valueDesc">Сортировать по числовому параметру в обратном порядке</button>
+        <button id="get_pdf">Получить PDF</button>
         <table>
             <tr>
                 <th>Наименования показателя</th>
@@ -93,5 +94,25 @@
             <canvas id="myChart4" width="200" height="200"></canvas>
         </div>
         <script src="{% static 'script/main.js' %}"></script>
+
+        <div class="sec_token">
+            {% csrf_token %}
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#get_pdf').click(function () {
+                    $.ajax({
+                        type: 'post',
+                        url: '/create_pdf/',
+                        data: {'html': $('html').html(), 'csrfmiddlewaretoken': $("input[name='csrfmiddlewaretoken']").val(),},
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    })
+                });
+            })
+        </script>
+
     </body>
 </html>

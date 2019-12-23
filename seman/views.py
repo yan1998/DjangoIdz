@@ -97,3 +97,33 @@ def processEnglishWords(fileContent):
             'frequency': round(100 / countOfEnglishWords * countUniqueEnglishWord, 2)
         })
     return sorted(englishWordsResult, key=itemgetter('count'), reverse=True)
+
+def create_pdf(request):
+    from Idz.settings import MEDIA_ROOT_W,BASE_DIR
+    import pdfkit
+    import os
+
+    if request.method == 'POST':
+
+        # from selenium import webdriver
+        #
+        # DRIVER = BASE_DIR + '\\Idz\\phantomjs\\bin\\phantomjs.exe'
+        #
+        # driver = webdriver.PhantomJS(DRIVER)
+        # driver.get("https://ru.stackoverflow.com/")
+        # screenshot = driver.save_screenshot(MEDIA_ROOT_W + "\\my_screenshot.png")
+        # driver.quit()
+
+        str_html = request.POST.get('html')
+
+        path_wkhtmltopdf = BASE_DIR + '\\Idz\\wkhtmltox\\bin\\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+
+        pdf = MEDIA_ROOT_W + '\\out.pdf'
+        pdfkit.from_string(str_html, pdf, configuration=config)
+        return HttpResponse('true')
+    else:
+        return HttpResponse('false')
+
+
+
