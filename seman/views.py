@@ -105,14 +105,19 @@ def create_pdf(request):
 
     if request.method == 'POST':
 
-        # from selenium import webdriver
-        #
-        # DRIVER = BASE_DIR + '\\Idz\\phantomjs\\bin\\phantomjs.exe'
-        #
-        # driver = webdriver.PhantomJS(DRIVER)
-        # driver.get("https://ru.stackoverflow.com/")
-        # screenshot = driver.save_screenshot(MEDIA_ROOT_W + "\\my_screenshot.png")
-        # driver.quit()
+        # Идея - Строку html которую я получаю записать в отдельный файл с расщирением html
+        # Сделать контроллер который будет отображать этот файл
+        # Сделать скрин этой страницы и скрин записать в pdf файл
+
+
+        from selenium import webdriver
+
+        DRIVER = BASE_DIR + '\\Idz\\phantomjs\\bin\\phantomjs.exe'
+
+        driver = webdriver.PhantomJS(DRIVER)
+        driver.get("http://127.0.0.1:8000/sort_results/valueDesc/")
+        screenshot = driver.save_screenshot(MEDIA_ROOT_W + "\\my_screenshot.png")
+        driver.quit()
 
         str_html = request.POST.get('html')
 
