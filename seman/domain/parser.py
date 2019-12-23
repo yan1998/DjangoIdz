@@ -12,7 +12,7 @@ class Parser:
             for i in range(1, len(table_trs)):
                 semantics.append({
                     'title': table_trs[i].findAll('td')[0].text.strip(),
-                    'val': table_trs[i].findAll('td')[1].text.strip()
+                    'val': float(table_trs[i].findAll('td')[1].text.strip().replace(' %', ''))
                 })
 
             words = []
@@ -21,7 +21,7 @@ class Parser:
                 cur = table_word_trs[i]
                 words.append({
                     'word': cur.findAll('td')[0].text.strip(),
-                    'count': cur.findAll('td')[1].text.strip(),
+                    'count': int(cur.findAll('td')[1].text.strip()),
                     'frequency': cur.findAll('td')[2].text.strip()
                 })
 
@@ -31,7 +31,7 @@ class Parser:
                 cur = stop_words_trs[i]
                 stop_words.append({
                     'word': cur.findAll('td')[0].text.strip(),
-                    'count': cur.findAll('td')[1].text.strip(),
+                    'count': int(cur.findAll('td')[1].text.strip()),
                     'frequency': cur.findAll('td')[2].text.strip()
                 })
 

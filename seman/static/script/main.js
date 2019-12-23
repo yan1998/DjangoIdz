@@ -130,10 +130,6 @@ count_words_en = [];
         new_color_back_en.push(arrayRandElement(сolors_back));
     });
 
-    console.log(count_words_en);
-    console.log(name_words_en);
-    console.log(new_color_back_en);
-
 var ctx = document.getElementById('myChart4').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'pie',
@@ -157,3 +153,23 @@ var myChart = new Chart(ctx, {
             }
         }
     });
+
+$('#nameAsc').click(function()
+{
+    window.location.replace('/sort_results/nameAsc');
+});
+
+$('#nameDesc').click(function()
+{
+    window.location.replace('/sort_results/nameDesc');
+});
+
+$('#valueAsc').click(function()
+{
+    window.location.replace('/sort_results/valueAsc');
+});
+
+$('#valueDesc').click(function()
+{
+    window.location.replace('/sort_results/valueDesc');
+});
