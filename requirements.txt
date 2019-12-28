@@ -7,3 +7,4 @@ python-docx==0.8.10
 requests==2.22.0
 beautifulsoup4==4.8.1
 pdfminer==20191125
+selenium==3.141.0
