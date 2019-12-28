@@ -46,6 +46,8 @@ def processTextViaAdvego(fileContent):
     s = requests.Session()
     response = s.post('https://advego.com/text/seo/', data=postload)
     parseResult = Parser.parseAdvego(response)
+    if parseResult == None:
+        return None
     parseResult['semantics'].append(processPunctuationChars(fileContent))
     parseResult['english_words'] = processEnglishWords(fileContent)
     return parseResult
