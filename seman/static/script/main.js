@@ -153,23 +153,4 @@ var myChart = new Chart(ctx, {
             }
         }
     });
-
-$('#nameAsc').click(function()
-{
-    window.location.replace('/sort_results/nameAsc');
-});
-
-$('#nameDesc').click(function()
-{
-    window.location.replace('/sort_results/nameDesc');
-});
-
-$('#valueAsc').click(function()
-{
-    window.location.replace('/sort_results/valueAsc');
-});
-
-$('#valueDesc').click(function()
-{
-    window.location.replace('/sort_results/valueDesc');
-});
+    

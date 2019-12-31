@@ -1,0 +1,28 @@
+body {
+    background-color: #f5f5f5;
+}
+
+#form-container {
+    margin-top: 100px;
+    max-width: 420px;
+}
+
+#file {
+    cursor: pointer;
+}
+
+#report {
+    max-width: 750px;
+}
+
+#accordion {
+    margin-top: 15px;
+}
+
+.btn-link {
+    color:green;
+}
+
+.card-body {
+    background-color: #dcf7d3;
+}

@@ -4,93 +4,200 @@
     <head>
         <meta charset="UTF-8">
         <title>Результат обработки текста</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'style/main.css' %}">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     </head>
+
     <body>
-        <button id="nameAsc">Сортировать по алфавиту в прямом порядке</button>
-        <button id="nameDesc">Сортировать по алфавиту в обратном порядке</button>
-        <br>
-        <button id="valueAsc">Сортировать по числовому параметру в прямом порядке</button>
-        <button id="valueDesc">Сортировать по числовому параметру в обратном порядке</button>
-        <table>
-            <tr>
-                <th>Наименования показателя</th>
-                <th>Значение</th>
-            </tr>
-            {% for item in semantics %}
-            <tr>
-                <td>{{ item.title }}</td>
-                <td>{{ item.val }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+        <div id="report" class="container text-center">
+            <div class="btn-group" role="group">           
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Сортировка по алфавиту
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="/sort_results/nameAsc">В прямом порядке</a>
+                    <a class="dropdown-item" href="/sort_results/nameDesc">В обратном порядке</a>
+                </div>
+            </div>
 
-        <br><br>
+            <div class="btn-group" role="group">  
+                <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Сортировать по числовому параметру
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                    <a class="dropdown-item" href="/sort_results/valueAsc">В прямом порядке</a>
+                    <a class="dropdown-item" href="/sort_results/valueDesc">В обратном порядке</a>
+                </div>
+            </div>
 
-        <table>
-            <tr>
-                <th>Слово</th>
-                <th>Количество</th>
-                <th>Частота, %</th>
-            </tr>
-            {% for item in words %}
-            <tr class="count_tr">
-                <td class="count_td_name">{{ item.word }}</td>
-                <td class="count_td">{{ item.count }}</td>
-                <td class="count_td_fr">{{ item.frequency }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#mainTable" aria-expanded="true" aria-controls="collapseOne">
+                                Сводная таблица результатов
+                            </button>
+                        </h5>
+                    </div>
 
-        <br><br>
+                    <div id="mainTable" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Наименования показателя</th>
+                                        <th>Значение</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in semantics %}
+                                    <tr>
+                                        <td>{{ item.title }}</td>
+                                        <td>{{ item.val }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-        <table>
-            <tr>
-                <th>Слово</th>
-                <th>Количество</th>
-                <th>Частота, %</th>
-            </tr>
-            {% for item in stop_words %}
-            <tr>
-                <td>{{ item.word }}</td>
-                <td>{{ item.count }}</td>
-                <td>{{ item.frequency }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        
-        <br><br>
-        
-        <table>
-            <tr>
-                <th>Слово</th>
-                <th>Количество</th>
-                <th>Частота, %</th>
-            </tr>
-            {% for item in english_words %}
-            <tr class="count_tr_en">
-                <td class="count_td_name_en">{{ item.word }}</td>
-                <td class="count_td_en">{{ item.count }}</td>
-                <td>{{ item.frequency }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#oftenWords" aria-expanded="true" aria-controls="collapseOne">
+                                Наиболее часто встречающиеся слова
+                            </button>
+                        </h5>
+                    </div>
 
-        <div style="width: 600px;">
-            <canvas id="myChart" width="200" height="200"></canvas>
+                    <div id="oftenWords" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table text-center">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Слово</th>
+                                        <th>Количество</th>
+                                        <th>Частота, %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in words %}
+                                    <tr class="count_tr">
+                                        <td class="count_td_name">{{ item.word }}</td>
+                                        <td class="count_td">{{ item.count }}</td>
+                                        <td class="count_td_fr">{{ item.frequency }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#stopWords" aria-expanded="true" aria-controls="collapseOne">
+                                Стоп-слова
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="stopWords" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Слово</th>
+                                        <th>Количество</th>
+                                        <th>Частота, %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in stop_words %}
+                                    <tr>
+                                        <td>{{ item.word }}</td>
+                                        <td>{{ item.count }}</td>
+                                        <td>{{ item.frequency }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingFour">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#englishWords" aria-expanded="true" aria-controls="collapseOne">
+                                Английские слова
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="englishWords" class="collapse show" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Слово</th>
+                                        <th>Количество</th>
+                                        <th>Частота, %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in english_words %}
+                                    <tr class="count_tr_en">
+                                        <td class="count_td_name_en">{{ item.word }}</td>
+                                        <td class="count_td_en">{{ item.count }}</td>
+                                        <td>{{ item.frequency }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br><br>
-        <div style="width: 400px;">
-            <canvas id="myChart2" width="200" height="200"></canvas>
+
+        <div class="row">
+            <div class="col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
+                <h3 class="text-center">Наиболее часто встречающиеся слова</h3>
+                <canvas id="myChart"></canvas>
+            </div>
+            
+            <div class="col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
+                <h3 class="text-center">Костя, вставь описание плиз</h3>
+                <canvas id="myChart2" ></canvas>
+            </div>
         </div>
-        <br><br>
-        <div style="width: 600px;">
-            <canvas id="myChart3" width="200" height="200"></canvas>
+
+        <div class="row">
+            <div class="col-12 col-xs-12 col-md-12 col-lg-12 col-xl-12">
+                <h3 class="text-center">Костя, вставь название плиз</h3>
+                <canvas id="myChart3"></canvas>
+            </div>
         </div>
-        <br><br>
-        <div style="width: 600px;">
-            <canvas id="myChart4" width="200" height="200"></canvas>
+
+        <div class="row">
+            <div class="col-12 col-xs-12 col-md-12 col-lg-12 col-xl-12">
+                <h3 class="text-center">Костя, вставь название плиз</h3>
+                <canvas id="myChart4"></canvas>
+            </div>
         </div>
         <script src="{% static 'script/main.js' %}"></script>
     </body>
